@@ -1,0 +1,101 @@
+
+html {
+    font-family: arial;
+}
+
+.pin {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid black;
+    background: #666;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-weight: bold;
+    line-height: 26px;
+
+}
+
+.name {
+    width: 140px;
+    display: inline-block;
+    font-weight: bold;
+    color: #444;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.sname {
+    height: 5px;
+    font-weight: bold;
+    color: #444;
+    margin: 0;
+}
+
+.label {
+    height: 5px;
+    font-weight: bold;
+    font-size: 10px;
+    color: #444;
+    margin: 0;
+    padding-top: 13px;
+    padding-bottom: 0px;
+
+}
+.none {
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    background: #FFF;
+}
+
+.led {
+
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    border: 2px solid black;
+    background: #500;
+    text-align: center;
+    font-size: 8px;
+    color: white;
+    line-height: 26px;
+}
+.led:before{
+    content: "LED";
+}
+
+.on{
+    background: #f00;
+    color: black;
+}
+.off{
+    background: #500;
+    color: white;
+}
+
+.push {
+    border-radius: 26%;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    border: 2px solid black;
+    background: #DDD;
+    text-align: center;
+    font-size: 8px;
+    line-height: 26px;
+}
+.push:before{
+    content: "PUSH";
+}
+.container {
+    display: inline-block;
+}
+
+.liner {
+    border-top: 1px solid #CCCCCC;
+    padding: 1px;
+}
