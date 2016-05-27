@@ -2,70 +2,78 @@
 html {
     font-family: arial;
 }
+table { 
+    border-collapse: collapse; 
+}
+tr {
+    height: 30px;
+    border-top: 1px solid #AAA;
+    border-bottom: 1px solid #AAA;
+
+}
+
+td {
+    width:80px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.name_container{
+    text-align: left;
+}
 
 .pin {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
+    width: 24px;
+    height: 24px;
     display: inline-block;
+    border-radius: 50%;
     border: 2px solid black;
+    line-height: 150%;
     background: #666;
     text-align: center;
-    vertical-align: middle;
     color: white;
     font-weight: bold;
-    line-height: 26px;
-
 }
 
+.pin_container{
+    vertical-align: middle;
+    text-align: center;
+}
 .name {
-    width: 140px;
-    display: inline-block;
-    font-weight: bold;
-    color: #444;
-    margin: 0;
-    white-space: nowrap;
-}
-
-.sname {
-    height: 5px;
     font-weight: bold;
     color: #444;
     margin: 0;
 }
 
 .label {
-    height: 5px;
     font-weight: bold;
     font-size: 10px;
-    color: #444;
+    color: #666;
     margin: 0;
-    padding-top: 13px;
-    padding-bottom: 0px;
-
 }
-.none {
-    width: 26px;
-    height: 26px;
-    display: inline-block;
-    background: #FFF;
+
+#pin-1 {
+    border-radius: 0%;
+    width: 24px;
+    height: 24px;
 }
 
 .led {
 
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
     display: inline-block;
     border: 2px solid black;
     background: #500;
     text-align: center;
     font-size: 8px;
     color: white;
-    line-height: 26px;
+    width:24px;
+    height:24px;
 }
+
 .led:before{
     content: "LED";
+    line-height: 310%;
 }
 
 .on{
@@ -79,23 +87,27 @@ html {
 
 .push {
     border-radius: 26%;
-    width: 24px;
-    height: 24px;
     display: inline-block;
     border: 2px solid black;
     background: #DDD;
     text-align: center;
     font-size: 8px;
-    line-height: 26px;
+    width:24px;
+    height:24px;
 }
 .push:before{
     content: "PUSH";
-}
-.container {
-    display: inline-block;
+    line-height: 310%;
 }
 
-.liner {
-    border-top: 1px solid #CCCCCC;
-    padding: 1px;
+.plus:before{ content: "+V";}
+.gnd:before{ content: "GND";}
+.unk:before{ content: "Unk";}
+.polarity{
+    color: #444;
+    font-style: italic;
+    font-size: 70%;
 }
+
+.left { text-align: left; }
+.right { text-align: right; }

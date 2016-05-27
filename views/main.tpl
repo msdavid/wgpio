@@ -7,40 +7,42 @@
 
 </head>
 <body>
-
-<div class="container">
+<table>
     %for pin in pins[::2]:
-        <div class="liner">
-            <div class="name"> 
-                <div class="sname">${pin.name}</div>
-                <div id="label-${pin.pid}" class="label">CLick</div>
-            </div>
-            <div class="none">&nbsp;</div>
-            <div id="device-${pin.pid}" class="none">&nbsp;</div>
-            <div class="none">&nbsp;</div>
-            <div class="pin">${pin.pid}</div>
-        </div>
-    %endfor
-</div>
-<div class="container">
-    %for pin in pins[1::2]:
-        <div class="liner">
-            <div class="pin">${pin.pid}</div>
-            <div class="none">&nbsp;</div>
-            <div id="device-${pin.pid}" class="none">&nbsp;</div>
-            <div class="none">&nbsp;</div>
-            <div class="none">&nbsp;</div>
-            <div class="none">&nbsp;</div>
-            <div class="none">&nbsp;</div>
-            <div class="name"> 
-                <div class="sname">${pin.name}</div>
-                <div id="label-${pin.pid}" class="label">CLick</div>
-            </div>
-        </div>
-    %endfor
-</div>
-    <script>
+        <tr>
+            <td class=name_container> 
+                <div class="name">${pin.name}</div>
+                <div pid="${pin.pid}" id="label-${pin.pid}" class="label">CLick</div>
+            </td>
+            <td>
+                %if pin.channel > 0:
+                <div pid="${pin.pid}" id="polarity-${pin.pid}" class="polarity right unk"></div>
+                %endif
+            </td>
+            <td><div pid="${pin.pid}" id="device-${pin.pid}"></div></td>
+            <td class="pin_container"> 
+                <div id="pin-${pin.pid}" class="pin">${pin.pid}</div>
 
+            ## adding one to pin
+            <% pin = pins[pin.pid] %> 
+            
+                <div id="pin-${pin.pid}" class="pin">${pin.pid}</div>
+            </td>
+            <td><div pid="${pin.pid}" id="device-${pin.pid}"></div></td>
+            <td>
+                %if pin.channel > 0:
+                <div pid="${pin.pid}" id="polarity-${pin.pid}" class="polarity left unk"></div>
+                %endif
+            </td>
+            <td class="name_container"> 
+                <div class="name">${pin.name}</div>
+                <div pid="${pin.pid}" id="label-${pin.pid}" class="label">CLick</div>
+            </td> 
+        </tr>
+    %endfor
+</table>
+<script>
+var x;
     (function poll(){
         $.ajax({ url: "/out", success: function(data){
             $.each( data, function(index, pin ) {
@@ -65,9 +67,33 @@
     });
     $(document).on('mouseup', '.push', function(){
        console.log("yop"); 
+    });
+
+    $(document).on('mousedown', '.polarity', function(){
+        obj = $(this);
+        id = obj.attr("pid");
+
+        if ( obj.hasClass('unk') ){
+            obj.removeClass('unk');
+            obj.addClass('plus');
+            $.ajax({ url: "/in/"+ id +":setpolarity:1"});
+            return;
+       }
+        if ( obj.hasClass('plus') ){
+            obj.removeClass('plus');
+            obj.addClass('gnd');
+            $.ajax({ url: "/in/"+ id +":setpolarity:0"});
+            return;
+       }
+        if ( obj.hasClass('gnd') ){
+            obj.removeClass('gnd');
+            obj.addClass('unk');
+            $.ajax({ url: "/in/"+ id +":setpolarity:-1"});
+            return;
+       }
 
     });
-    </script>
+</script>
 
 </body>
 </html>
