@@ -13,13 +13,14 @@ tr {
 }
 
 td {
-    width:80px;
+    width:60px;
     vertical-align: middle;
     text-align: center;
 }
 
 .name_container{
     text-align: left;
+    width: 120px;
 }
 
 .pin {
@@ -29,7 +30,7 @@ td {
     border-radius: 50%;
     border: 2px solid black;
     line-height: 150%;
-    background: #666;
+    
     text-align: center;
     color: white;
     font-weight: bold;
@@ -38,6 +39,7 @@ td {
 .pin_container{
     vertical-align: middle;
     text-align: center;
+    width:80px;
 }
 .name {
     font-weight: bold;
@@ -62,8 +64,7 @@ td {
 
     border-radius: 50%;
     display: inline-block;
-    border: 2px solid black;
-    background: #500;
+    border: 1px solid black;
     text-align: center;
     font-size: 8px;
     color: white;
@@ -81,9 +82,10 @@ td {
     color: black;
 }
 .off{
-    background: #500;
+    background: #300;
     color: white;
 }
+
 
 .push {
     border-radius: 26%;
@@ -94,6 +96,12 @@ td {
     font-size: 8px;
     width:24px;
     height:24px;
+    color: black;
+}
+
+.press {
+    background: #444;
+    color: white;
 }
 .push:before{
     content: "PUSH";
@@ -103,11 +111,14 @@ td {
 .plus:before{ content: "+V";}
 .gnd:before{ content: "GND";}
 .unk:before{ content: "Unk";}
-.polarity{
+.term{
     color: #444;
     font-style: italic;
     font-size: 70%;
+    text-align: center;
 }
 
-.left { text-align: left; }
-.right { text-align: right; }
+.green { background-color: #050; }
+.red { background-color: #500; }
+.grey {  background-color: #666; }
+
