@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="/css/base.css">
-    <script src="/js/jquery-2.2.4.min.js"></script>
+    <link rel="stylesheet" href="/wgpio/css/base.css">
+    <script src="/wgpio/js/jquery-2.2.4.min.js"></script>
     <title> WGPIO v0.2 by Mauro Sauco</title>
 
 </head>
@@ -55,7 +55,7 @@
 <script>
  window.pins = null;
     (function poll(){
-        $.ajax({ url: "/out", success: function(data){
+        $.ajax({ url: "/wgpio/out", success: function(data){
             window.pins = data;
             $.each( data, function(index, pin ) {
                 var pid = pin.pid;
@@ -115,7 +115,7 @@
         id = obj.attr("pid");
         epin = $('#pin-' + id); 
         term = window.pins[id -1].term;
-        $.ajax({ url: "/in/"+ id +":setstatus:" + term});
+        $.ajax({ url: "/wgpio/in/"+ id +":setstatus:" + term});
         obj.addClass("press");
         epin.removeClass();
         if (term == 0) epin.addClass("pin green");
@@ -128,7 +128,7 @@
         epin = $('#pin-' + id);
         term = window.pins[id - 1].term;
         if (term > -1) term = 1 - term;
-        $.ajax({url: "/in/"+ id +":setstatus:" + term});
+        $.ajax({url: "/wgpio/in/"+ id +":setstatus:" + term});
         obj.removeClass("press");
         epin.removeClass();
         if (term == 0) epin.addClass("pin red");
@@ -141,19 +141,19 @@
         if ( obj.hasClass('unk') ){
             obj.removeClass('unk');
             obj.addClass('plus');
-            $.ajax({ url: "/in/"+ id +":setterm:1"});
+            $.ajax({ url: "/wgpio/in/"+ id +":setterm:1"});
             return;
        }
         if ( obj.hasClass('plus') ){
             obj.removeClass('plus');
             obj.addClass('gnd');
-            $.ajax({ url: "/in/"+ id +":setterm:0"});
+            $.ajax({ url: "/wgpio/in/"+ id +":setterm:0"});
             return;
        }
         if ( obj.hasClass('gnd') ){
             obj.removeClass('gnd');
             obj.addClass('unk');
-            $.ajax({ url: "/in/"+ id +":setterm:-1"});
+            $.ajax({ url: "/wgpio/in/"+ id +":setterm:-1"});
             return;
        }
     });
@@ -161,7 +161,7 @@
         label = $(this).html();
         if (label == '') label = 'Click'
         id = $(this).attr('pid')
-        $.ajax({url: "/in/"+ id +":setlabel:" + label});
+        $.ajax({url: "wgpio/in/"+ id +":setlabel:" + label});
 
     });
     $(document).on('focusin','.label',function(){

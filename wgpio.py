@@ -6,6 +6,8 @@ from threading import Thread, Timer
 from time import sleep
 from os.path import realpath, dirname
 
+app = bottle.app()
+
 PATH = dirname(realpath(__file__))
 bottle.TEMPLATE_PATH.insert(0, PATH + "/views/")
 
@@ -84,39 +86,39 @@ PINS = [Pin(elm=e) for e in PINS_DEFAULTS]
 # GWGPIO is a GLobal that will have the WGPIO class once initialized
 GWGPIO = None
 
-
-@get('/')
-@view('main')
+@app.get('/wgpio')
+@view('wgpio.tmpl')
 def main():
     return dict(pins=PINS)
 
 
-@get('/out')
+@app.get('/wgpio/out')
 def out():
     sleep(REFRESH_RATE)
     return json.dumps([pin.asdict() for pin in PINS])
 
 
-@get('/in/<cmd>')
+@app.get('/wgpio/in/<cmd>')
 def ain(cmd):
     if not GWGPIO:
         return 'Error: WGPIO was not initialised'
     return process(cmd)
 
 
-@route('/css/<filepath:path>')
+@app.route('/wgpio/css/<filepath:path>')
 def server_static_css(filepath):
     return static_file(filepath, root=PATH + '/css')
 
 
-@route('/js/<filepath:path>')
+@app.route('/wgpio/js/<filepath:path>')
 def server_static_js(filepath):
     return static_file(filepath, root=PATH + '/js')
 
 
-@route('/media/<filepath:path>')
+@app.route('wgpio/media/<filepath:path>')
 def server_static_media(filepath):
     return static_file(filepath, root=PATH + '/media')
+
 
 
 def process(cmd):
@@ -135,7 +137,7 @@ def process(cmd):
 
 
 def runweb():
-    run(host='0.0.0.0', port=8000, debug=True, server='cherrypy', quiet=True)
+    app.run(host='0.0.0.0', port=8000, debug=True, server='cherrypy', quiet=True)
 
 webt = Thread(target=runweb)
 webt.daemon = True
