@@ -1,10 +1,15 @@
+import bottle
 from bottle import *
 from bottle import mako_view as view
 import json
 from threading import Thread, Timer
 from time import sleep
+from os.path import realpath, dirname
 
-REFRESH_RATE = 0.3
+PATH = dirname(realpath(__file__))
+bottle.TEMPLATE_PATH.insert(0, PATH + "/views/")
+
+REFRESH_RATE = 0.01
 
 
 class Pin:
@@ -101,17 +106,17 @@ def ain(cmd):
 
 @route('/css/<filepath:path>')
 def server_static_css(filepath):
-    return static_file(filepath, root='css')
+    return static_file(filepath, root=PATH + '/css')
 
 
 @route('/js/<filepath:path>')
 def server_static_js(filepath):
-    return static_file(filepath, root='js')
+    return static_file(filepath, root=PATH + '/js')
 
 
 @route('/media/<filepath:path>')
 def server_static_media(filepath):
-    return static_file(filepath, root='media')
+    return static_file(filepath, root=PATH + '/media')
 
 
 def process(cmd):
@@ -173,7 +178,7 @@ class WGPIO:
                     return pin
             raise Error('Unknown Channel')
         elif self.MODE == self.BOARD:
-            return bypin(channel)
+            return self.bypin(channel)
         else:
             raise Error("MODE not set (BCM or BOARD)")
 

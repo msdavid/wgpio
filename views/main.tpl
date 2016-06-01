@@ -96,7 +96,7 @@
                     edevice.addClass(dclass);
                 };
 
-                if (mode == 1){
+                if (mode == 0){
                     if (status != term && term > -1 && status > -1){
                         edevice.removeClass("off");
                         edevice.addClass("on");
